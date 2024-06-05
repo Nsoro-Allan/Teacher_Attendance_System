@@ -335,6 +335,7 @@ button:hover{
     color: var(--bg-color);
     font-weight: 700;
     font-size: 1rem;
+    text-transform: capitalize;
 }
 
 .container-right .content table tr td img{

@@ -9,8 +9,8 @@
         <a href="./teachers.php"><img src="./images/teachers.ico" alt="Icon"> Teachers</a>
         <a href="#"><img src="./images/attendance.ico" alt="Icon"> Attendance</a>
         <a href="#"><img src="./images/report.ico" alt="Icon"> Report</a>
-        <a href="#"><img src="./images/users.ico" alt="Icon"> Users</a>
-        <a href="#"><img src="./images/settings.ico" alt="Icon"> Account Settings</a>
+        <a href="./users.php"><img src="./images/users.ico" alt="Icon"> Users</a>
+        <a href="./account_settings.php"><img src="./images/settings.ico" alt="Icon"> Account Settings</a>
     </div>
     <div class="bottom">
         <p><?php echo $_SESSION['tas_user'];?></p>
