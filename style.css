@@ -380,6 +380,13 @@ button:hover{
     margin-top: 3px;
 }
 
+.container-right .content form img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
 .container-right .content form button{
     padding: 10px;
     margin-top: 10px;
