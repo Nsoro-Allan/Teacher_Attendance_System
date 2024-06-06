@@ -7,8 +7,8 @@
     <div class="links">
         <a href="./dashboard.php"><img src="./images/dashboard.ico" alt="Icon"> Dashboard</a>
         <a href="./teachers.php"><img src="./images/teachers.ico" alt="Icon"> Teachers</a>
-        <a href="#"><img src="./images/attendance.ico" alt="Icon"> Attendance</a>
-        <a href="#"><img src="./images/report.ico" alt="Icon"> Report</a>
+        <a href="./attendance.php"><img src="./images/attendance.ico" alt="Icon"> Attendance</a>
+        <a href="./report.php"><img src="./images/report.ico" alt="Icon"> Report</a>
         <a href="./users.php"><img src="./images/users.ico" alt="Icon"> Users</a>
         <a href="./account_settings.php"><img src="./images/settings.ico" alt="Icon"> Account Settings</a>
     </div>

@@ -15,7 +15,7 @@
                 else if($admin_email != $row['admin_email'] && $admin_password == $row['admin_password']){
                     echo"<script>alert('Invalid Email...');</script>";
                 }
-                else if($admin_email != $row['admin_email'] && $admin_password == $row['admin_password']){
+                else if($admin_email == $row['admin_email'] && $admin_password != $row['admin_password']){
                     echo"<script>alert('Invalid Password...');</script>";
                 }
                 else{

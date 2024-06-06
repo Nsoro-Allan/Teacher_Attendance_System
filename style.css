@@ -345,6 +345,10 @@ button:hover{
 }
 
 .container-right .content table tr td a{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
     padding: 8px 15px;
     text-decoration: none;
     background: var(--bg-color);
@@ -358,6 +362,32 @@ button:hover{
     background: var(--bg-hover-color);
     cursor: pointer;
     transition: 0.2s ease-in;
+}
+
+.container-right .content table tr td form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.container-right .content table tr td form button{
+    width: 60%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-right .content table tr td form button img{
+    width: 20px;
+    height: 20px;
+    margin-top: -1px;
+    margin-right: 5px;
 }
 
 .container-right .content form{
@@ -394,3 +424,17 @@ button:hover{
     width: 20%;
 }
 /* Dashboard Ends Here */
+
+/* Printing Styles Start Here */
+@media print{
+    .container-left{
+        display: none;
+    }
+    .container-right{
+        width: 100%;
+    }
+    .container-right .content .buttons{
+        display: none;
+    }
+}
+/* Printing Styles End Here */
