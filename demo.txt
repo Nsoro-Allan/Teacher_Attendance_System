@@ -2,49 +2,31 @@
 include("sessions.php");
 include("db_connection.php");
 
-$today = date('Y-m-d');
-
-// Check if each teacher is already checked in today
-$disable_checkin = [];
-$select = $con->query("SELECT * FROM `teachers`");
-while ($row = mysqli_fetch_assoc($select)) {
-    $teacher_id = $row['teacher_id'];
-    $check_existing = $con->query("SELECT * FROM `attendance` WHERE `teacher_id`='$teacher_id' AND DATE(`checkin_time`)='$today'");
-    if (mysqli_num_rows($check_existing) > 0) {
-        $disable_checkin[$teacher_id] = true;
-    } else {
-        $disable_checkin[$teacher_id] = false;
-    }
-}
-
 // CheckIn Attendance Starts Here 
 if(isset($_POST['check_in'])){
     $teacher_id=mysqli_real_escape_string($con, $_POST['teacher_id']);
-    if($disable_checkin[$teacher_id]){
-        $commentary = "You are already checked in today.";
-    } else {
-        $presence="Present";
-        $checkin_time=date('Y-m-d H:i:s');
-        $checkout_time="Not Yet...";
+    $presence="Present";
+    $checkin_time=date('Y-m-d H:i:s');
+    $checkout_time="Not Yet...";
+    if($checkin_time <= strtotime("8:30am")){
+        $commentary="You are early and on time...";
+    }
+    else{
+        $commentary="You are late for work... ";
+    }
 
-        if(time() <= strtotime("8:30am")){
-            $commentary="You are early and on time...";
-        } else{
-            $commentary="You are late for work... ";
-        }
+    $add=$con->query("INSERT INTO `attendance` VALUES('','$teacher_id','$presence','$checkin_time','$checkout_time','$commentary')");
 
-        $add=$con->query("INSERT INTO `attendance` VALUES('','$teacher_id','$presence','$checkin_time','$checkout_time','$commentary')");
-
-        if($add){
-            header("Location: attendance.php");
-        } else{
-            echo"
-            <script>
-                alert('Failed to perform the checkin attendance');
-                window.location.href='add_attendance.php';
-            </script>
-            ";
-        }
+    if($add){
+        header("Location: attendance.php");
+    }
+    else{
+        echo"
+        <script>
+            alert('Failed to perform the checkin attendance');
+            window.location.href='add_attendance.php';
+        </script>
+        ";
     }
 }
 // CheckIn Attendance Ends Here 
@@ -53,12 +35,14 @@ if(isset($_POST['check_in'])){
 if(isset($_POST['check_out'])){
     $teacher_id=mysqli_real_escape_string($con, $_POST['teacher_id']);
     $checkout_time=date('Y-m-d H:i:s');
+    
 
-    $update=$con->query("UPDATE `attendance` SET `checkout_time`='$checkout_time' WHERE `teacher_id`='$teacher_id' AND DATE(`checkin_time`)='$today'");
+    $update=$con->query("UPDATE `attendance` SET `checkout_time`='$checkout_time' WHERE `teacher_id`='$teacher_id'");
 
     if($update){
         header("Location: attendance.php");
-    } else{
+    }
+    else{
         echo"
         <script>
             alert('Failed to perform the checkout attendance');
@@ -119,14 +103,14 @@ if(isset($_POST['check_out'])){
                     <td>
                         <form action="" method="post">
                             <input type="hidden" name="teacher_id" value="<?php echo $t_id;?>">
-                            <button type="submit" name="check_in" <?php if($disable_checkin[$t_id]) echo "disabled"; ?>><img src="./images/checked_in.ico" alt="Icon"> Checked In...</button>
+                            <button type="submit" name="check_in"><img src="./images/checked_in.ico" alt="Icon"> Checked In...</button>
                         </form>
                     </td>
 
                     <td>
                         <form action="" method="post">
                             <input type="hidden" name="teacher_id" value="<?php echo $t_id;?>">
-                            <button type="submit" name="check_out" <?php if(!$disable_checkin[$t_id]) echo "disabled"; ?>><img src="./images/checked_out.ico" alt="Icon"> Checked Out...</button>
+                            <button type="submit" name="check_out"><img src="./images/checked_out.ico" alt="Icon"> Checked Out...</button>
                         </form>
                     </td>
 
