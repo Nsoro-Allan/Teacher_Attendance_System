@@ -28,9 +28,9 @@ if(isset($_POST['check_in'])){
         $checkout_time="Not Yet...";
 
         if(time() <= strtotime("8:30am")){
-            $commentary="You are early and on time...";
+            $commentary="On Time...";
         } else{
-            $commentary="You are late for work... ";
+            $commentary="Late for work... ";
         }
 
         $add=$con->query("INSERT INTO `attendance` VALUES('','$teacher_id','$presence','$checkin_time','$checkout_time','$commentary')");
