@@ -2,7 +2,7 @@
 include("sessions.php");
 include("db_connection.php");
 
-$session=$_SESSION['tas_user'];
+$session=$_SESSION['tas_gatekeeper'];
 
 // Select Data
 $select=$con->query("SELECT * FROM `admin` WHERE `admin_email`='$session'");
@@ -18,7 +18,7 @@ if(isset($_POST['edit_account'])){
     $update=$con->query("UPDATE `admin` SET `admin_email`='$admin_email', `admin_password`='$admin_password' WHERE `admin_email`='$session'");
 
     if($update){
-        $_SESSION['tas_user']=$admin_email;
+        $_SESSION['tas_gatekeeper']=$admin_email;
         header("Location: account_settings.php");
     }
     else{

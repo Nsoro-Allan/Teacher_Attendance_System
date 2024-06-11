@@ -1,5 +1,5 @@
 <?php
-    if(isset($_SESSION['tas_user'])){
+    if(isset($_SESSION['tas_gatekeeper'])){
         header("Location: dashboard.php");
     }
     else{

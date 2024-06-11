@@ -46,6 +46,7 @@
             <div class="img">
             <img src="./images/icon.ico" alt="Favicon...">
             </div>
+            <h1>[Admin - Panel]</h1>
             <h1>Teachers Attendance System</h1>
             <h1>[TAS]</h1>
         </div>

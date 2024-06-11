@@ -9,7 +9,7 @@
             while($row=mysqli_fetch_assoc($login)){
                 if($admin_email == $row['admin_email'] && $admin_password == $row['admin_password']){
                     session_start();
-                    $_SESSION['tas_user']=$admin_email;
+                    $_SESSION['tas_gatekeeper']=$admin_email;
                     header("Location: dashboard.php");
                 }
                 else if($admin_email != $row['admin_email'] && $admin_password == $row['admin_password']){
@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAS - Login</title>
+    <title>TAS - Gatekeeper Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./images/icon.ico" type="image/x-icon">
     <script src="./sweetalert.min.js"></script>
@@ -46,6 +46,7 @@
             <div class="img">
             <img src="./images/icon.ico" alt="Favicon...">
             </div>
+            <h1>[Gatekeeper - Panel]</h1>
             <h1>Teachers Attendance System</h1>
             <h1>[TAS]</h1>
         </div>
