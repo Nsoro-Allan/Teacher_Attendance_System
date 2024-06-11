@@ -1,3 +1,4 @@
+<script src="./sweetalert.min.js"></script>
 <div class="container-left">
     <div class="top">
         <img src="./images/icon.ico" alt="Icon">

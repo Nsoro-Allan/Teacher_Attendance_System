@@ -19,7 +19,8 @@
                     echo"<script>alert('Invalid Password...');</script>";
                 }
                 else{
-                    echo"<script>alert('Invalid email and  password...');</script>";
+                    $error_msg="Invalid Email and Password...";
+                    // echo"<script>alert('Invalid email and  password...');</script>";
                 }
             }
         }
@@ -36,6 +37,7 @@
     <title>TAS - Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./images/icon.ico" type="image/x-icon">
+    <script src="./sweetalert.min.js"></script>
 </head>
 <body>
     <div class="form-container">
@@ -67,3 +69,17 @@
     </div>
 </body>
 </html>
+
+<?php
+if(isset($error_msg)){
+    echo "<script>
+            swal({
+                title: 'Warning!',
+                text: '$error_msg',
+                icon: 'success',
+            }).then(function() {
+                window.location.href = 'login.php';
+            });
+    </script>";
+}
+?>
