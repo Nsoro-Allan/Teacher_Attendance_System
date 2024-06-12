@@ -18,14 +18,10 @@ if(isset($_POST['edit_user'])){
     $update=$con->query("UPDATE `admin` SET `admin_email`='$admin_email', `admin_password`='$admin_password' WHERE `admin_id`='$admin_id'");
 
     if($update){
-        header("Location: users.php");
+        $msg="Editted User Successfully...";
     }
     else{
-        echo"
-            <script>
-                alert('Failed to edit user...');
-            </script>
-        ";
+        $error_msg="Failed to edit user...";
     }
 }
 
@@ -71,3 +67,29 @@ if(isset($_POST['edit_user'])){
     </div>
 </body>
 </html>
+
+<?php
+if(isset($msg)){
+    echo "<script>
+            swal({
+                title: 'Success!',
+                text: '$msg',
+                icon: 'success',
+            }).then(function() {
+                window.location.href = 'users.php';
+            });
+    </script>";
+}
+elseif(isset($error_msg)){
+    echo "<script>
+    swal({
+        title: 'Error!',
+        text: '$error_msg',
+        icon: 'error',
+    }).then(function() {
+        window.location.href = 'edit_user.php';
+    });
+    </script>";
+}
+
+?>
