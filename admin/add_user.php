@@ -9,12 +9,10 @@ if(isset($_POST['add_user'])){
     $insert=$con->query("INSERT INTO `admin` VALUES ('','$admin_email','$admin_password')");
 
     if($insert){
-        header("Location: users.php");
+        $msg="Added New User Successfully...";
     }
     else{
-        echo"<script>
-            alert('Failed to add new user...');
-        </script>";
+        $error_msg="Failed to add new user...";
     }
 }
 
@@ -60,3 +58,29 @@ if(isset($_POST['add_user'])){
     </div>
 </body>
 </html>
+
+<?php
+if(isset($msg)){
+    echo "<script>
+            swal({
+                title: 'Success!',
+                text: '$msg',
+                icon: 'success',
+            }).then(function() {
+                window.location.href = 'users.php';
+            });
+    </script>";
+}
+elseif(isset($error_msg)){
+    echo "<script>
+    swal({
+        title: 'Error!',
+        text: '$error_msg',
+        icon: 'error',
+    }).then(function() {
+        window.location.href = 'add_user.php';
+    });
+    </script>";
+}
+
+?>

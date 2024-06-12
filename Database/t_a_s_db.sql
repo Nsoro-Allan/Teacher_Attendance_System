@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2024 at 03:53 PM
+-- Generation Time: Jun 11, 2024 at 07:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,7 +38,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `admin_email`, `admin_password`) VALUES
-(1, 'admin@admin.com', 'admin@123');
+(1, 'admin@admin.com', 'admin@123'),
+(3, 'demo@gmail.com', 'demo');
 
 -- --------------------------------------------------------
 
@@ -58,6 +59,18 @@ CREATE TABLE `attendance` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gatekeeper`
+--
+
+CREATE TABLE `gatekeeper` (
+  `gatekeeper_id` int(11) NOT NULL,
+  `gatekeeper_name` varchar(50) NOT NULL,
+  `gatekeeper_password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `teachers`
 --
 
@@ -66,6 +79,17 @@ CREATE TABLE `teachers` (
   `teacher_name` varchar(50) NOT NULL,
   `teacher_photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `teachers`
+--
+
+INSERT INTO `teachers` (`teacher_id`, `teacher_name`, `teacher_photo`) VALUES
+(3, 'Teacher 2', 'Elon musk in he 0.png'),
+(5, 'Teacher 3', 'case-study-5.png'),
+(6, 'Teacher 4', 'case-study-4.png'),
+(7, 'Teacher 5', 'Elon musk in he 1.png'),
+(8, 'Teacher1', 'my cartoon clone.png');
 
 --
 -- Indexes for dumped tables
@@ -85,6 +109,12 @@ ALTER TABLE `attendance`
   ADD KEY `fk_1` (`teacher_id`);
 
 --
+-- Indexes for table `gatekeeper`
+--
+ALTER TABLE `gatekeeper`
+  ADD PRIMARY KEY (`gatekeeper_id`);
+
+--
 -- Indexes for table `teachers`
 --
 ALTER TABLE `teachers`
@@ -98,19 +128,25 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `gatekeeper`
+--
+ALTER TABLE `gatekeeper`
+  MODIFY `gatekeeper_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

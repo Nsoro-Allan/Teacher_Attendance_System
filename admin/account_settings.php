@@ -2,7 +2,7 @@
 include("sessions.php");
 include("db_connection.php");
 
-$session=$_SESSION['tas_user'];
+$session=$_SESSION['tas_admin'];
 
 // Select Data
 $select=$con->query("SELECT * FROM `admin` WHERE `admin_email`='$session'");
@@ -18,15 +18,11 @@ if(isset($_POST['edit_account'])){
     $update=$con->query("UPDATE `admin` SET `admin_email`='$admin_email', `admin_password`='$admin_password' WHERE `admin_email`='$session'");
 
     if($update){
-        $_SESSION['tas_user']=$admin_email;
-        header("Location: account_settings.php");
+        $_SESSION['tas_admin']=$admin_email;
+        $msg="Edited user account successfully...";
     }
     else{
-        echo"
-            <script>
-                alert('Failed to edit user...');
-            </script>
-        ";
+        $error_msg="Failed to edit user account...";
     }
 }
 
@@ -72,3 +68,29 @@ if(isset($_POST['edit_account'])){
     </div>
 </body>
 </html>
+
+<?php
+if(isset($msg)){
+    echo "<script>
+            swal({
+                title: 'Success!',
+                text: '$msg',
+                icon: 'success',
+            }).then(function() {
+                window.location.href = 'account_settings.php';
+            });
+    </script>";
+}
+elseif(isset($error_msg)){
+    echo "<script>
+    swal({
+        title: 'Error!',
+        text: '$error_msg',
+        icon: 'error',
+    }).then(function() {
+        window.location.href = 'account_settings.php';
+    });
+    </script>";
+}
+
+?>

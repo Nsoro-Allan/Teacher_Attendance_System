@@ -1,31 +1,31 @@
 <?php
     include("db_connection.php");
     if(isset($_POST['login'])){
-        $admin_email=mysqli_real_escape_string($con, $_POST['admin_email']);
-        $admin_password=mysqli_real_escape_string($con, $_POST['admin_password']);
+        $gatekeeper_name=mysqli_real_escape_string($con, $_POST['gatekeeper_name']);
+        $gatekeeper_password=mysqli_real_escape_string($con, $_POST['gatekeeper_password']);
 
-        $login=$con->query("SELECT * FROM `admin`");
+        $login=$con->query("SELECT * FROM `gatekeeper`");
         if(mysqli_num_rows($login)>0){
             while($row=mysqli_fetch_assoc($login)){
-                if($admin_email == $row['admin_email'] && $admin_password == $row['admin_password']){
+                if($gatekeeper_name == $row['gatekeeper_name'] && $gatekeeper_password == $row['gatekeeper_password']){
                     session_start();
-                    $_SESSION['tas_gatekeeper']=$admin_email;
-                    header("Location: dashboard.php");
+                    $_SESSION['tas_gatekeeper']=$gatekeeper_name;
+                    $msg="LoggedIn Successfully...";
                 }
-                else if($admin_email != $row['admin_email'] && $admin_password == $row['admin_password']){
-                    echo"<script>alert('Invalid Email...');</script>";
+                else if($gatekeeper_name != $row['gatekeeper_name'] && $gatekeeper_password == $row['gatekeeper_password']){
+                    $error_msg="Invalid Name...";
+
                 }
-                else if($admin_email == $row['admin_email'] && $admin_password != $row['admin_password']){
-                    echo"<script>alert('Invalid Password...');</script>";
+                else if($gatekeeper_name == $row['gatekeeper_name'] && $gatekeeper_password != $row['gatekeeper_password']){
+                    $error_msg="Invalid Password...";
                 }
                 else{
                     $error_msg="Invalid Email and Password...";
-                    // echo"<script>alert('Invalid email and  password...');</script>";
                 }
             }
         }
         else{
-            echo"<script>alert('User Not Found...');</script>";
+            $error_msg="User Not Found...";
         }
     }
 ?>
@@ -46,7 +46,7 @@
             <div class="img">
             <img src="./images/icon.ico" alt="Favicon...">
             </div>
-            <h1>[Gatekeeper - Panel]</h1>
+            <h1>[Gatekeeper - Portal]</h1>
             <h1>Teachers Attendance System</h1>
             <h1>[TAS]</h1>
         </div>
@@ -55,11 +55,11 @@
 
             <form action="" method="post">
                 
-                <label>Email:</label>
-                <input type="email" name="admin_email" placeholder="Enter your email..." required>
+                <label>Gatekeeper Name:</label>
+                <input type="text" name="gatekeeper_name" placeholder="Enter your name..." required>
                 
-                <label>Password:</label>
-                <input type="password" name="admin_password" placeholder="Enter your password..." required>
+                <label>Gatekeeper Password:</label>
+                <input type="password" name="gatekeeper_password" placeholder="Enter your password..." required>
 
                 <button type="submit" name="login">Login Here...</button>
 
@@ -72,12 +72,23 @@
 </html>
 
 <?php
-if(isset($error_msg)){
+if(isset($msg)){
     echo "<script>
             swal({
-                title: 'Warning!',
-                text: '$error_msg',
+                title: 'Success!',
+                text: '$msg',
                 icon: 'success',
+            }).then(function() {
+                window.location.href = 'dashboard.php';
+            });
+    </script>";
+}
+elseif(isset($error_msg)){
+    echo "<script>
+            swal({
+                title: 'Error!',
+                text: '$error_msg',
+                icon: 'error',
             }).then(function() {
                 window.location.href = 'login.php';
             });

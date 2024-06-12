@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['tas_user'])){
+if(!isset($_SESSION['tas_admin'])){
     echo"
     <script>
     alert('Please Loggin First...');

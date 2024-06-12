@@ -36,14 +36,10 @@ if(isset($_POST['check_in'])){
         $add=$con->query("INSERT INTO `attendance` VALUES('','$teacher_id','$presence','$checkin_time','$checkout_time','$commentary')");
 
         if($add){
-            header("Location: attendance.php");
+        $msg="Added Attendance Successfully...";
+            // header("Location: attendance.php");
         } else{
-            echo"
-            <script>
-                alert('Failed to perform the checkin attendance');
-                window.location.href='add_attendance.php';
-            </script>
-            ";
+            $error_msg="Failed to perform the checkin attendance";
         }
     }
 }
@@ -57,14 +53,10 @@ if(isset($_POST['check_out'])){
     $update=$con->query("UPDATE `attendance` SET `checkout_time`='$checkout_time' WHERE `teacher_id`='$teacher_id' AND DATE(`checkin_time`)='$today'");
 
     if($update){
-        header("Location: attendance.php");
+        $msg="Added Attendance Successfully...";
+        // header("Location: attendance.php");
     } else{
-        echo"
-        <script>
-            alert('Failed to perform the checkout attendance');
-            window.location.href='add_attendance.php';
-        </script>
-        ";
+        $error_msg="Failed to perform the checkout attendance";
     }
 }
 // CheckOut Attendance Ends Here 
@@ -104,7 +96,7 @@ if(isset($_POST['check_out'])){
                         <th>Teacher CheckOut</th>
                     </tr>
                     <?php
-                    $select=$con->query("SELECT * FROM `teachers`");
+                    $select=$con->query("SELECT * FROM `teachers` ORDER BY `teacher_id` DESC");
                     while($row=mysqli_fetch_assoc($select)){
                        $t_id=$row['teacher_id']; 
                        $teacher_name=$row['teacher_name']; 
@@ -145,3 +137,29 @@ if(isset($_POST['check_out'])){
     </div>
 </body>
 </html>
+
+<?php
+if(isset($msg)){
+    echo "<script>
+            swal({
+                title: 'Success!',
+                text: '$msg',
+                icon: 'success',
+            }).then(function() {
+                window.location.href = 'attendance.php';
+            });
+    </script>";
+}
+elseif(isset($error_msg)){
+    echo "<script>
+    swal({
+        title: 'Error!',
+        text: '$error_msg',
+        icon: 'error',
+    }).then(function() {
+        window.location.href = 'add_attendance.php';
+    });
+    </script>";
+}
+
+?>

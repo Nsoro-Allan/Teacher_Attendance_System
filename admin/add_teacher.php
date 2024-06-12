@@ -18,22 +18,12 @@ if(isset($_POST['add_teacher'])){
         $insert = $con->query("INSERT INTO `teachers`(`teacher_id`,`teacher_name`,`teacher_photo`) VALUES ('','$teacher_name','$teacher_photo')");
 
         if($insert){
-            header("location: teachers.php");
+            $msg="Added Teacher Successful...";
         } else {
-            echo 
-            '
-                <script>
-                    alert("Failed to add new teacher...");
-                </script>
-            ';
+            $error_msg="Failed to add new teacher...";
         }
     } else {
-        echo 
-        '
-        <script>
-            alert("Failed to upload teacher photo...");
-        </script>
-        ';
+        $error_msg="Failed to upload teacher photo...";
     }
 }
 }
@@ -78,3 +68,29 @@ if(isset($_POST['add_teacher'])){
     </div>
 </body>
 </html>
+
+<?php
+if(isset($msg)){
+    echo "<script>
+            swal({
+                title: 'Success!',
+                text: '$msg',
+                icon: 'success',
+            }).then(function() {
+                window.location.href = 'teachers.php';
+            });
+    </script>";
+}
+elseif(isset($error_msg)){
+    echo "<script>
+    swal({
+        title: 'Error!',
+        text: '$error_msg',
+        icon: 'error',
+    }).then(function() {
+        window.location.href = 'add_teacher.php';
+    });
+    </script>";
+}
+
+?>

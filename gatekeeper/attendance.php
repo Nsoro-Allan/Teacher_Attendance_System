@@ -55,7 +55,7 @@ include("db_connection.php");
                          $commentary=$row['commentary'];     
                     ?>    
                         <tr>
-                        <td><img src="uploads/<?php
+                        <td><img src="../admin/uploads/<?php
                          $t_id=$teacher_id;
                          $select1=$con->query("SELECT * FROM `teachers` WHERE `teacher_id`='$t_id'");
                          $row1=mysqli_fetch_assoc($select1);
@@ -75,7 +75,7 @@ include("db_connection.php");
                         <td><?php echo $commentary;?></td>
                         <td>
                             <a href="./edit_attendance.php?attendance_id=<?php echo $attendance_id;?>">Edit Attendance...</a>
-                            <a href="./delete_attendace.php?attendance_id=<?php echo $attendance_id;?>">Delete Attendance...</a>
+                            <a href="./delete_attendance.php?attendance_id=<?php echo $attendance_id;?>">Delete Attendance...</a>
                             </td>
                         </tr>
 

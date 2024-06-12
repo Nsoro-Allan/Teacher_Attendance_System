@@ -9,23 +9,23 @@
             while($row=mysqli_fetch_assoc($login)){
                 if($admin_email == $row['admin_email'] && $admin_password == $row['admin_password']){
                     session_start();
-                    $_SESSION['tas_user']=$admin_email;
-                    header("Location: dashboard.php");
+                    $_SESSION['tas_admin']=$admin_email;
+
+                    $msg="LoggedIn Successful...";
                 }
                 else if($admin_email != $row['admin_email'] && $admin_password == $row['admin_password']){
-                    echo"<script>alert('Invalid Email...');</script>";
+                    $error_msg="Invalid Email...";
                 }
                 else if($admin_email == $row['admin_email'] && $admin_password != $row['admin_password']){
-                    echo"<script>alert('Invalid Password...');</script>";
+                    $error_msg="Invalid Password...";
                 }
                 else{
                     $error_msg="Invalid Email and Password...";
-                    // echo"<script>alert('Invalid email and  password...');</script>";
                 }
             }
         }
         else{
-            echo"<script>alert('User Not Found...');</script>";
+            $error_msg="User Not Found...";
         }
     }
 ?>
@@ -46,7 +46,7 @@
             <div class="img">
             <img src="./images/icon.ico" alt="Favicon...">
             </div>
-            <h1>[Admin - Panel]</h1>
+            <h1>[Admin - Portal]</h1>
             <h1>Teachers Attendance System</h1>
             <h1>[TAS]</h1>
         </div>
@@ -72,15 +72,27 @@
 </html>
 
 <?php
-if(isset($error_msg)){
+if(isset($msg)){
     echo "<script>
             swal({
-                title: 'Warning!',
-                text: '$error_msg',
+                title: 'Success!',
+                text: '$msg',
                 icon: 'success',
             }).then(function() {
-                window.location.href = 'login.php';
+                window.location.href = 'dashboard.php';
             });
     </script>";
 }
+elseif(isset($error_msg)){
+    echo "<script>
+    swal({
+        title: 'Error!',
+        text: '$error_msg',
+        icon: 'error',
+    }).then(function() {
+        window.location.href = 'login.php';
+    });
+    </script>";
+}
+
 ?>

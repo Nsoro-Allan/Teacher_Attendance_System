@@ -1,11 +1,10 @@
 <?php
 include("sessions.php");
-unset($_SESSION['tas_user']);
-session_destroy();
+unset($_SESSION['tas_admin']);
 echo"
 <script>
 alert('You Have Logged Out Successfully...');
-window.location.href='index.php';
+window.location.href='../';
 </script>
 ";
 ?>

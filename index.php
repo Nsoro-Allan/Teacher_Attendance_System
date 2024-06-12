@@ -21,7 +21,7 @@
                 <h4>Loggin As?</h4>
                 <div class="buttons">
                     <a href="./admin/" target="_blank">Admin</a>
-                    <a href="./gatekeeper/" target="_blank">Gate Keeper</a>
+                    <a href="./gatekeeper/" target="_blank">GateKeeper</a>
                 </div>
             </div>
 
