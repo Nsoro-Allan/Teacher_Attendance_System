@@ -16,22 +16,10 @@ if(isset($_POST['edit_teacher_name'])){
     $teacher_name=mysqli_real_escape_string($con,$_POST['teacher_name']);
     $update=$con->query("UPDATE `teachers` SET `teacher_name`='$teacher_name' WHERE `teacher_id`='$teacher_id'");
     if($update){
-        echo 
-        '
-            <script>
-                alert("Edit Teacher Name Successfully...");
-                window.location.href="edit_teacher.php?teacher_id='.$teacher_id.'";
-            </script>
-        ';
+        $msg="Edit Teacher Name Successfully...";
     }
     else{
-        echo 
-        '
-            <script>
-                alert("Failed to edit teacher name...");
-                window.location.href="edit_teacher.php?teacher_id='.$teacher_id.'";
-            </script>
-        ';
+        $error_msg="Failed to edit teacher name...";
     }
 }
 
@@ -50,29 +38,14 @@ if(isset($_POST['edit_teacher_photo'])){
         $insert = $con->query("UPDATE `teachers` SET `teacher_photo`='$teacher_photo' WHERE `teacher_id`='$teacher_id'");
 
         if($insert){
-            echo 
-            '
-                <script>
-                    alert("Edit Teacher Photo Successfully...");
-                    window.location.href="edit_teacher.php?teacher_id='.$teacher_id.'";
-                </script>
-            ';
+        $msg="Editted Teacher Photo Successfully...";
         } else {
-            echo 
-            '
-                <script>
-                    alert("Failed to edit teacher photo...");
-                    window.location.href="edit_teacher.php?teacher_id='.$teacher_id.'";
-                </script>
-            ';
+
+        $error_msg="Failed to upload teacher photo...";
+
         }
     } else {
-        echo 
-        '
-        <script>
-            alert("Failed to upload teacher photo...");
-        </script>
-        ';
+        $error_msg="Failed to upload teacher photo...";
     }
 }
 }
@@ -126,3 +99,29 @@ if(isset($_POST['edit_teacher_photo'])){
     </div>
 </body>
 </html>
+
+<?php
+if(isset($msg)){
+    echo "<script>
+            swal({
+                title: 'Success!',
+                text: '$msg',
+                icon: 'success',
+            }).then(function() {
+                window.location.href = 'teachers.php';
+            });
+    </script>";
+}
+elseif(isset($error_msg)){
+    echo "<script>
+    swal({
+        title: 'Error!',
+        text: '$error_msg',
+        icon: 'error',
+    }).then(function() {
+        window.location.href = 'teachers.php';
+    });
+    </script>";
+}
+
+?>

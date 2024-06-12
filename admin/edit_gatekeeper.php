@@ -18,10 +18,10 @@ if(isset($_POST['edit_gatekeeper'])){
     $update=$con->query("UPDATE `gatekeeper` SET `gatekeeper_name`='$gatekeeper_name', `gatekeeper_password`='$gatekeeper_password' WHERE `gatekeeper_id`='$gatekeeper_id'");
 
     if($update){
-        $msg="Added New Gatekeeper Successfully...";
+        $msg="Edited Gatekeeper Successfully...";
     }
     else{
-        $error_msg="Failed to add new Gatekeeper...";
+        $error_msg="Failed to Edit Gatekeeper...";
     }
 }
 
