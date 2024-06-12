@@ -155,7 +155,7 @@ elseif(isset($error_msg)){
                 text: '$error_msg',
                 icon: 'error',
             }).then(function() {
-                window.location.href = 'add_attendance.php;
+                window.location.href = 'add_attendance.php';
             });
     </script>";
 }

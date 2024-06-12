@@ -88,7 +88,7 @@ elseif(isset($error_msg)){
                 text: '$error_msg',
                 icon: 'error',
             }).then(function() {
-                window.location.href = 'account_settings.php;
+                window.location.href = 'account_settings.php';
             });
     </script>";
 }
